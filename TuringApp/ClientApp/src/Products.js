@@ -6,7 +6,7 @@ import { CheckBox, SelectBox, NumberBox, Form, Item } from 'devextreme-react';
 
 import { ItemDetailModal } from './ItemDetailModal';
 
-export class deneme2 extends React.Component {
+export class Products extends React.Component {
 
     constructor(props) {
 

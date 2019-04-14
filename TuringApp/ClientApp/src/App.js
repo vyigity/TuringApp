@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router';
 import { Layout } from './components/Layout';
-import { deneme2 } from './deneme2';
+import { Products } from './Products';
 
 import '../node_modules/devextreme/dist/css/dx.common.css';
 import '../node_modules/devextreme/dist/css/dx.material.blue.light.css';
@@ -14,7 +14,7 @@ export default class App extends Component {
   render() {
     return (
       <Layout>
-            <Route exact path='/' component={deneme2} />        
+            <Route exact path='/' component={Products} />        
       </Layout>
     );
   }
