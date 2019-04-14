@@ -1,0 +1,373 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+    <IsPackable>false</IsPackable>
+    <SpaRoot>ClientApp\</SpaRoot>
+    <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
+    <UserSecretsId>065bf829-db1d-42fa-a630-9e542bdf3ebf</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.OData" Version="7.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="2.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" />
+    <PackageReference Include="MySql.Data" Version="8.0.15" />
+    <PackageReference Include="MySql.Data.EntityFrameworkCore.Design" Version="8.0.15" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Content Remove="$(SpaRoot)**" />
+    <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="ClientApp\src\components\deneme.tsx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\TypeScripts\deneme.tsx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Images\.DS_Store" />
+    <None Include="wwwroot\Images\images\.DS_Store" />
+    <None Include="wwwroot\Images\images\tshirtshop.png" />
+    <None Include="wwwroot\Images\product_images\a-partridge-in-a-pear-tree-2.gif" />
+    <None Include="wwwroot\Images\product_images\a-partridge-in-a-pear-tree-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\a-partridge-in-a-pear-tree.gif" />
+    <None Include="wwwroot\Images\product_images\adoration-of-the-kings-2.gif" />
+    <None Include="wwwroot\Images\product_images\adoration-of-the-kings-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\adoration-of-the-kings.gif" />
+    <None Include="wwwroot\Images\product_images\afghan-flower-2.gif" />
+    <None Include="wwwroot\Images\product_images\afghan-flower-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\afghan-flower.gif" />
+    <None Include="wwwroot\Images\product_images\albania-flower-2.gif" />
+    <None Include="wwwroot\Images\product_images\albania-flower-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\albania-flower.gif" />
+    <None Include="wwwroot\Images\product_images\alsace-2.gif" />
+    <None Include="wwwroot\Images\product_images\alsace-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\alsace.gif" />
+    <None Include="wwwroot\Images\product_images\altar-piece-2.gif" />
+    <None Include="wwwroot\Images\product_images\altar-piece-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\altar-piece.gif" />
+    <None Include="wwwroot\Images\product_images\apocalypse-tapestry-2.gif" />
+    <None Include="wwwroot\Images\product_images\apocalypse-tapestry-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\apocalypse-tapestry.gif" />
+    <None Include="wwwroot\Images\product_images\arc-d-triomphe-2.gif" />
+    <None Include="wwwroot\Images\product_images\arc-d-triomphe-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\arc-d-triomphe.gif" />
+    <None Include="wwwroot\Images\product_images\austria-flower-2.gif" />
+    <None Include="wwwroot\Images\product_images\austria-flower-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\austria-flower.gif" />
+    <None Include="wwwroot\Images\product_images\baby-seal-2.gif" />
+    <None Include="wwwroot\Images\product_images\baby-seal-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\baby-seal.gif" />
+    <None Include="wwwroot\Images\product_images\birds-2.gif" />
+    <None Include="wwwroot\Images\product_images\birds-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\birds.gif" />
+    <None Include="wwwroot\Images\product_images\buffalo-2.gif" />
+    <None Include="wwwroot\Images\product_images\buffalo-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\buffalo.gif" />
+    <None Include="wwwroot\Images\product_images\bulgarian-flower-2.gif" />
+    <None Include="wwwroot\Images\product_images\bulgarian-flower-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\bulgarian-flower.gif" />
+    <None Include="wwwroot\Images\product_images\canada-goose-2.gif" />
+    <None Include="wwwroot\Images\product_images\canada-goose-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\canada-goose.gif" />
+    <None Include="wwwroot\Images\product_images\caribou-2.gif" />
+    <None Include="wwwroot\Images\product_images\caribou-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\caribou.gif" />
+    <None Include="wwwroot\Images\product_images\centaur-2.gif" />
+    <None Include="wwwroot\Images\product_images\centaur-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\centaur.gif" />
+    <None Include="wwwroot\Images\product_images\chartres-cathedral-2.gif" />
+    <None Include="wwwroot\Images\product_images\chartres-cathedral-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\chartres-cathedral.gif" />
+    <None Include="wwwroot\Images\product_images\christmas-seal-2.gif" />
+    <None Include="wwwroot\Images\product_images\christmas-seal-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\christmas-seal.gif" />
+    <None Include="wwwroot\Images\product_images\christmas-tree-2.gif" />
+    <None Include="wwwroot\Images\product_images\christmas-tree-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\christmas-tree.gif" />
+    <None Include="wwwroot\Images\product_images\coat-of-arms-2.gif" />
+    <None Include="wwwroot\Images\product_images\coat-of-arms-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\coat-of-arms.gif" />
+    <None Include="wwwroot\Images\product_images\colobus-2.gif" />
+    <None Include="wwwroot\Images\product_images\colobus-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\colobus.gif" />
+    <None Include="wwwroot\Images\product_images\colombia-flower-2.gif" />
+    <None Include="wwwroot\Images\product_images\colombia-flower-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\colombia-flower.gif" />
+    <None Include="wwwroot\Images\product_images\congo-flower-2.gif" />
+    <None Include="wwwroot\Images\product_images\congo-flower-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\congo-flower.gif" />
+    <None Include="wwwroot\Images\product_images\congo-rhino-2.gif" />
+    <None Include="wwwroot\Images\product_images\congo-rhino-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\congo-rhino.gif" />
+    <None Include="wwwroot\Images\product_images\corsica-2.gif" />
+    <None Include="wwwroot\Images\product_images\corsica-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\corsica.gif" />
+    <None Include="wwwroot\Images\product_images\costa-rica-flower-2.gif" />
+    <None Include="wwwroot\Images\product_images\costa-rica-flower-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\costa-rica-flower.gif" />
+    <None Include="wwwroot\Images\product_images\county-of-nice-2.gif" />
+    <None Include="wwwroot\Images\product_images\county-of-nice-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\county-of-nice.gif" />
+    <None Include="wwwroot\Images\product_images\dutch-sea-horse-2.gif" />
+    <None Include="wwwroot\Images\product_images\dutch-sea-horse-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\dutch-sea-horse.gif" />
+    <None Include="wwwroot\Images\product_images\dutch-swans-2.gif" />
+    <None Include="wwwroot\Images\product_images\dutch-swans-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\dutch-swans.gif" />
+    <None Include="wwwroot\Images\product_images\easter-rebellion-2.gif" />
+    <None Include="wwwroot\Images\product_images\easter-rebellion-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\easter-rebellion.gif" />
+    <None Include="wwwroot\Images\product_images\equatorial-rhino-2.gif" />
+    <None Include="wwwroot\Images\product_images\equatorial-rhino-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\equatorial-rhino.gif" />
+    <None Include="wwwroot\Images\product_images\espresso-2.gif" />
+    <None Include="wwwroot\Images\product_images\espresso-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\espresso.gif" />
+    <None Include="wwwroot\Images\product_images\ethiopian-elephant-2.gif" />
+    <None Include="wwwroot\Images\product_images\ethiopian-elephant-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\ethiopian-elephant.gif" />
+    <None Include="wwwroot\Images\product_images\ethiopian-rhino-2.gif" />
+    <None Include="wwwroot\Images\product_images\ethiopian-rhino-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\ethiopian-rhino.gif" />
+    <None Include="wwwroot\Images\product_images\gabon-flower-2.gif" />
+    <None Include="wwwroot\Images\product_images\gabon-flower-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\gabon-flower.gif" />
+    <None Include="wwwroot\Images\product_images\galileo-2.gif" />
+    <None Include="wwwroot\Images\product_images\galileo-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\galileo.gif" />
+    <None Include="wwwroot\Images\product_images\gallic-cock-2.gif" />
+    <None Include="wwwroot\Images\product_images\gallic-cock-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\gallic-cock.gif" />
+    <None Include="wwwroot\Images\product_images\ghana-flower-2.gif" />
+    <None Include="wwwroot\Images\product_images\ghana-flower-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\ghana-flower.gif" />
+    <None Include="wwwroot\Images\product_images\guiness-2.gif" />
+    <None Include="wwwroot\Images\product_images\guiness-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\guiness.gif" />
+    <None Include="wwwroot\Images\product_images\haute-couture-2.gif" />
+    <None Include="wwwroot\Images\product_images\haute-couture-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\haute-couture.gif" />
+    <None Include="wwwroot\Images\product_images\holly-cat-2.gif" />
+    <None Include="wwwroot\Images\product_images\holly-cat-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\holly-cat.gif" />
+    <None Include="wwwroot\Images\product_images\hunt-2.gif" />
+    <None Include="wwwroot\Images\product_images\hunt-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\hunt.gif" />
+    <None Include="wwwroot\Images\product_images\ifni-fish-2.gif" />
+    <None Include="wwwroot\Images\product_images\ifni-fish-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\ifni-fish.gif" />
+    <None Include="wwwroot\Images\product_images\iris-2.gif" />
+    <None Include="wwwroot\Images\product_images\iris-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\iris.gif" />
+    <None Include="wwwroot\Images\product_images\irish-coat-of-arms-2.gif" />
+    <None Include="wwwroot\Images\product_images\irish-coat-of-arms-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\irish-coat-of-arms.gif" />
+    <None Include="wwwroot\Images\product_images\israel-flower-2.gif" />
+    <None Include="wwwroot\Images\product_images\israel-flower-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\israel-flower.gif" />
+    <None Include="wwwroot\Images\product_images\italia-2.gif" />
+    <None Include="wwwroot\Images\product_images\italia-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\italia.gif" />
+    <None Include="wwwroot\Images\product_images\italian-airmail-2.gif" />
+    <None Include="wwwroot\Images\product_images\italian-airmail-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\italian-airmail.gif" />
+    <None Include="wwwroot\Images\product_images\italy-jesus-2.gif" />
+    <None Include="wwwroot\Images\product_images\italy-jesus-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\italy-jesus.gif" />
+    <None Include="wwwroot\Images\product_images\italy-maria-2.gif" />
+    <None Include="wwwroot\Images\product_images\italy-maria-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\italy-maria.gif" />
+    <None Include="wwwroot\Images\product_images\kat-over-new-moon-2.gif" />
+    <None Include="wwwroot\Images\product_images\kat-over-new-moon-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\kat-over-new-moon.gif" />
+    <None Include="wwwroot\Images\product_images\king-salmon-2.gif" />
+    <None Include="wwwroot\Images\product_images\king-salmon-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\king-salmon.gif" />
+    <None Include="wwwroot\Images\product_images\laos-bird-2.gif" />
+    <None Include="wwwroot\Images\product_images\laos-bird-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\laos-bird.gif" />
+    <None Include="wwwroot\Images\product_images\laotian-elephant-2.gif" />
+    <None Include="wwwroot\Images\product_images\laotian-elephant-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\laotian-elephant.gif" />
+    <None Include="wwwroot\Images\product_images\liberian-elephant-2.gif" />
+    <None Include="wwwroot\Images\product_images\liberian-elephant-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\liberian-elephant.gif" />
+    <None Include="wwwroot\Images\product_images\lorraine-2.gif" />
+    <None Include="wwwroot\Images\product_images\lorraine-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\lorraine.gif" />
+    <None Include="wwwroot\Images\product_images\love-2.gif" />
+    <None Include="wwwroot\Images\product_images\love-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\love.gif" />
+    <None Include="wwwroot\Images\product_images\madonna-child-2.gif" />
+    <None Include="wwwroot\Images\product_images\madonna-child-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\madonna-child.gif" />
+    <None Include="wwwroot\Images\product_images\marianne-2.gif" />
+    <None Include="wwwroot\Images\product_images\marianne-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\marianne.gif" />
+    <None Include="wwwroot\Images\product_images\mazzini-2.gif" />
+    <None Include="wwwroot\Images\product_images\mazzini-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\mazzini.gif" />
+    <None Include="wwwroot\Images\product_images\mercury-2.gif" />
+    <None Include="wwwroot\Images\product_images\mercury-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\mercury.gif" />
+    <None Include="wwwroot\Images\product_images\mistletoe-2.gif" />
+    <None Include="wwwroot\Images\product_images\mistletoe-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\mistletoe.gif" />
+    <None Include="wwwroot\Images\product_images\mozambique-lion-2.gif" />
+    <None Include="wwwroot\Images\product_images\mozambique-lion-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\mozambique-lion.gif" />
+    <None Include="wwwroot\Images\product_images\musk-ox-2.gif" />
+    <None Include="wwwroot\Images\product_images\musk-ox-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\musk-ox.gif" />
+    <None Include="wwwroot\Images\product_images\mustache-monkey-2.gif" />
+    <None Include="wwwroot\Images\product_images\mustache-monkey-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\mustache-monkey.gif" />
+    <None Include="wwwroot\Images\product_images\notre-dame-2.gif" />
+    <None Include="wwwroot\Images\product_images\notre-dame-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\notre-dame.gif" />
+    <None Include="wwwroot\Images\product_images\paris-peace-conference-2.gif" />
+    <None Include="wwwroot\Images\product_images\paris-peace-conference-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\paris-peace-conference.gif" />
+    <None Include="wwwroot\Images\product_images\peru-llama-2.gif" />
+    <None Include="wwwroot\Images\product_images\peru-llama-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\peru-llama.gif" />
+    <None Include="wwwroot\Images\product_images\poland-flower-2.gif" />
+    <None Include="wwwroot\Images\product_images\poland-flower-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\poland-flower.gif" />
+    <None Include="wwwroot\Images\product_images\romania-alsatian-2.gif" />
+    <None Include="wwwroot\Images\product_images\romania-alsatian-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\romania-alsatian.gif" />
+    <None Include="wwwroot\Images\product_images\romania-flower-2.gif" />
+    <None Include="wwwroot\Images\product_images\romania-flower-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\romania-flower.gif" />
+    <None Include="wwwroot\Images\product_images\romulus-remus-2.gif" />
+    <None Include="wwwroot\Images\product_images\romulus-remus-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\romulus-remus.gif" />
+    <None Include="wwwroot\Images\product_images\russia-flower-2.gif" />
+    <None Include="wwwroot\Images\product_images\russia-flower-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\russia-flower.gif" />
+    <None Include="wwwroot\Images\product_images\sambar-2.gif" />
+    <None Include="wwwroot\Images\product_images\sambar-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\sambar.gif" />
+    <None Include="wwwroot\Images\product_images\san-marino-flower-2.gif" />
+    <None Include="wwwroot\Images\product_images\san-marino-flower-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\san-marino-flower.gif" />
+    <None Include="wwwroot\Images\product_images\sarah-bernhardt-2.gif" />
+    <None Include="wwwroot\Images\product_images\sarah-bernhardt-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\sarah-bernhardt.gif" />
+    <None Include="wwwroot\Images\product_images\sea-gull-2.gif" />
+    <None Include="wwwroot\Images\product_images\sea-gull-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\sea-gull.gif" />
+    <None Include="wwwroot\Images\product_images\snow-deer-2.gif" />
+    <None Include="wwwroot\Images\product_images\snow-deer-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\snow-deer.gif" />
+    <None Include="wwwroot\Images\product_images\somali-fish-2.gif" />
+    <None Include="wwwroot\Images\product_images\somali-fish-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\somali-fish.gif" />
+    <None Include="wwwroot\Images\product_images\somali-ostriches-2.gif" />
+    <None Include="wwwroot\Images\product_images\somali-ostriches-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\somali-ostriches.gif" />
+    <None Include="wwwroot\Images\product_images\st-francis-2.gif" />
+    <None Include="wwwroot\Images\product_images\st-francis-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\st-francis.gif" />
+    <None Include="wwwroot\Images\product_images\st-lucia-2.gif" />
+    <None Include="wwwroot\Images\product_images\st-lucia-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\st-lucia.gif" />
+    <None Include="wwwroot\Images\product_images\st-lucy-2.gif" />
+    <None Include="wwwroot\Images\product_images\st-lucy-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\st-lucy.gif" />
+    <None Include="wwwroot\Images\product_images\st-patrick-2.gif" />
+    <None Include="wwwroot\Images\product_images\st-patrick-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\st-patrick.gif" />
+    <None Include="wwwroot\Images\product_images\st-peter-2.gif" />
+    <None Include="wwwroot\Images\product_images\st-peter-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\st-peter.gif" />
+    <None Include="wwwroot\Images\product_images\suvla-bay-2.gif" />
+    <None Include="wwwroot\Images\product_images\suvla-bay-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\suvla-bay.gif" />
+    <None Include="wwwroot\Images\product_images\swede-santa-2.gif" />
+    <None Include="wwwroot\Images\product_images\swede-santa-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\swede-santa.gif" />
+    <None Include="wwwroot\Images\product_images\sword-of-light-2.gif" />
+    <None Include="wwwroot\Images\product_images\sword-of-light-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\sword-of-light.gif" />
+    <None Include="wwwroot\Images\product_images\tankanyika-giraffe-2.gif" />
+    <None Include="wwwroot\Images\product_images\tankanyika-giraffe-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\tankanyika-giraffe.gif" />
+    <None Include="wwwroot\Images\product_images\the-promise-of-spring-2.gif" />
+    <None Include="wwwroot\Images\product_images\the-promise-of-spring-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\the-promise-of-spring.gif" />
+    <None Include="wwwroot\Images\product_images\the-rapture-of-psyche-2.gif" />
+    <None Include="wwwroot\Images\product_images\the-rapture-of-psyche-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\the-rapture-of-psyche.gif" />
+    <None Include="wwwroot\Images\product_images\the-three-wise-men-2.gif" />
+    <None Include="wwwroot\Images\product_images\the-three-wise-men-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\the-three-wise-men.gif" />
+    <None Include="wwwroot\Images\product_images\the-virgin-mary-2.gif" />
+    <None Include="wwwroot\Images\product_images\the-virgin-mary-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\the-virgin-mary.gif" />
+    <None Include="wwwroot\Images\product_images\thomas-moore-2.gif" />
+    <None Include="wwwroot\Images\product_images\thomas-moore-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\thomas-moore.gif" />
+    <None Include="wwwroot\Images\product_images\thrilling-love-2.gif" />
+    <None Include="wwwroot\Images\product_images\thrilling-love-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\thrilling-love.gif" />
+    <None Include="wwwroot\Images\product_images\Thumbs.db" />
+    <None Include="wwwroot\Images\product_images\torch-2.gif" />
+    <None Include="wwwroot\Images\product_images\torch-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\torch.gif" />
+    <None Include="wwwroot\Images\product_images\trout-2.gif" />
+    <None Include="wwwroot\Images\product_images\trout-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\trout.gif" />
+    <None Include="wwwroot\Images\product_images\uruguay-flower-2.gif" />
+    <None Include="wwwroot\Images\product_images\uruguay-flower-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\uruguay-flower.gif" />
+    <None Include="wwwroot\Images\product_images\visit-the-zoo-2.gif" />
+    <None Include="wwwroot\Images\product_images\visit-the-zoo-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\visit-the-zoo.gif" />
+    <None Include="wwwroot\Images\product_images\weather-vane-2.gif" />
+    <None Include="wwwroot\Images\product_images\weather-vane-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\weather-vane.gif" />
+    <None Include="wwwroot\Images\product_images\wreath-2.gif" />
+    <None Include="wwwroot\Images\product_images\wreath-thumbnail.gif" />
+    <None Include="wwwroot\Images\product_images\wreath.gif" />
+  </ItemGroup>
+
+  <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
+    <!-- Ensure Node.js is installed -->
+    <Exec Command="node --version" ContinueOnError="true">
+      <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
+    </Exec>
+    <Error Condition="'$(ErrorCode)' != '0'" Text="Node.js is required to build and run this project. To continue, please install Node.js from https://nodejs.org/, and then restart your command prompt or IDE." />
+    <Message Importance="high" Text="Restoring dependencies using 'npm'. This may take several minutes..." />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
+  </Target>
+
+  <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
+    <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build" />
+
+    <!-- Include the newly-built files in the publish output -->
+    <ItemGroup>
+      <DistFiles Include="$(SpaRoot)build\**" />
+      <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
+        <RelativePath>%(DistFiles.Identity)</RelativePath>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </ResolvedFileToPublish>
+    </ItemGroup>
+  </Target>
+
+</Project>

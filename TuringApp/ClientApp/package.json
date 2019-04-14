@@ -1,0 +1,32 @@
+{
+  "name": "TuringApp",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@syncfusion/ej2-react-buttons": "^17.1.38",
+    "@syncfusion/ej2-react-dropdowns": "^17.1.40",
+    "@syncfusion/ej2-react-grids": "^17.1.38",
+    "@types/react": "^16.8.12",
+    "@types/react-dom": "^16.8.3",
+    "bootstrap": "^3.4.1",
+    "devextreme": "^18.2.7",
+    "devextreme-react": "^18.2.7",
+    "react": "^16.8.6",
+    "react-bootstrap": "^0.31.5",
+    "react-data-grid": "^6.1.0",
+    "react-dom": "^16.8.6",
+    "react-router-bootstrap": "^0.24.4",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.0.17",
+    "require": "^2.4.20",
+    "requirejs": "^2.3.6",
+    "rimraf": "^2.6.2",
+    "typescript": "^3.4.2"
+  },
+  "scripts": {
+    "start": "rimraf ./build && react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
