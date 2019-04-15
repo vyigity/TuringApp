@@ -32,10 +32,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Include="ClientApp\src\TypeScripts\deneme.tsx" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="wwwroot\Images\.DS_Store" />
     <None Include="wwwroot\Images\images\.DS_Store" />
     <None Include="wwwroot\Images\images\tshirtshop.png" />
