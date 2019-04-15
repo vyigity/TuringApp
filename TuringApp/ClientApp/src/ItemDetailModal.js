@@ -4,11 +4,16 @@ import { Modal, Button, Row, Form, Grid,Col } from 'react-bootstrap';
 
 import TabPanel from 'devextreme-react/tab-panel';
 
-import { Button as DevButton } from 'devextreme-react';
+import { Button as DevButton, TextBox, SelectBox } from 'devextreme-react';
 
 import TabImageItem from './TabImageItem';
 
 import notify from 'devextreme/ui/notify';
+
+import {
+    Validator,
+    RequiredRule
+} from 'devextreme-react/validator';
 
 export class ItemDetailModal extends React.Component {
 
@@ -18,10 +23,18 @@ export class ItemDetailModal extends React.Component {
 
         this.state = {
 
+            quantity: 1,
             imageData: [],
-            selectedIndex: 0
+            selectedIndex: 0,
+            selectedProduct: null,
+            sizes: [],
+            colors: [],
+            selectedSize: null,
+            selectedColor: null
         }
     }
+
+    quantityTextBox = null;
 
     getImagesFromProp = () => {
 
@@ -36,6 +49,14 @@ export class ItemDetailModal extends React.Component {
     componentDidMount() {
 
         this.getImagesFromProp();
+
+        fetch('/odata/AttributeValue?$filter=AttributeId eq 1')
+            .then(response => response.json())
+            .then(data => this.setState({ sizes: data.value }));
+
+        fetch('/odata/AttributeValue?$filter=AttributeId eq 2')
+            .then(response => response.json())
+            .then(data => this.setState({ colors: data.value }));
     }
 
     onSelectionChanged = (args) => {
@@ -51,10 +72,51 @@ export class ItemDetailModal extends React.Component {
         return <span>{item.Name}</span>;
     }
 
-    addToCartClick = () => {
+    onQuantityChanged = (item) => {
 
-        notify("Item added to cart");
+        this.setState({
+            quantity: item.value
+        });
     }
+
+    addToCartClick = (e) => {
+
+        e.preventDefault();
+
+        let data = {
+            ItemId: 1,
+            ProductId: this.props.masterData.ProductId,
+            Quantity: this.state.quantity,
+            Attributes: JSON.stringify({ Size: this.state.selectedSize, Color: this.state.selectedColor })
+        };
+
+        fetch("/odata/ShoppingCart", {
+
+            headers: { 'Content-Type': 'application/json' },
+            method: "POST",
+            body: JSON.stringify(data)
+        })
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+
+                notify("Item added to cart.");
+
+            }).catch(function () {
+                console.log("An error occurred.");
+            });
+    }
+
+    onSizeChange = (args) => {
+
+        this.setState({ selectedSize: args.value });
+    };
+
+    onColorChange = (args) => {
+
+        this.setState({ selectedColor: args.value });
+    };
 
     render() {
         return (
@@ -72,101 +134,155 @@ export class ItemDetailModal extends React.Component {
                 </Modal.Header>
 
                 <Modal.Body style={{ padding: "30px" }}>
-
-                    <Row>
+                    <form action={'/odata/ShoppingCart'} onSubmit={this.addToCartClick}>
                         <Row>
-                            <Col sm={2}>
+                            <Row>
+                                <Col sm={2}>
 
-                                Name:
+                                    Name:
+
+                                        </Col>
+
+                                <Col sm={10}>
+
+                                    {this.props.masterData.Name}
+
+                                </Col>
+                            </Row>
+
+                            <Row>
+                                <Col sm={2}>
+
+                                    Description:
+
+                                        </Col>
+
+                                <Col sm={10}>
+
+                                    {this.props.masterData.Description}
+
+                                </Col>
+                            </Row>
+
+                            <Row>
+                                <Col sm={2}>
+
+                                    Price:
+
+                                        </Col>
+
+                                <Col sm={10}>
+
+                                    {this.props.masterData.Price}
+
+                                </Col>
+                            </Row>
+
+                            <Row>
+                                <Col sm={2}>
+
+                                    Discounted Price:
 
                                         </Col>
 
                             <Col sm={10}>
 
-                                {this.props.masterData.Name}
+                                    {this.props.masterData.DiscountedPrice}
 
-                            </Col>
-                        </Row>
+                                </Col>
+                            </Row>
 
-                        <Row>
-                            <Col sm={2}>
+                            <Row>
+                                <Col sm={2}>
 
-                                Description:
-
-                                        </Col>
-
-                            <Col sm={10}>
-
-                                {this.props.masterData.Description}
-
-                            </Col>
-                        </Row>
-
-                        <Row>
-                            <Col sm={2}>
-
-                                Price:
+                                    Size:
 
                                         </Col>
 
-                            <Col sm={10}>
+                                <Col sm={10}>
 
-                                {this.props.masterData.Price}
+                                    <SelectBox items={this.state.sizes}
+                                        valueExpr="AttributeValueId"
+                                        displayExpr="Value"
+                                        placeholder={'Choose size'}
+                                        showClearButton={true} onValueChanged={this.onSizeChange} />
+                                </Col>
+                            </Row>
 
-                            </Col>
-                        </Row>
+                            <Row>
+                                <Col sm={2}>
 
-                        <Row>
-                            <Col sm={2}>
-
-                                Discounted Price:
+                                    Size:
 
                                         </Col>
 
-                            <Col sm={10}>
+                                <Col sm={10}>
 
-                                {this.props.masterData.DiscountedPrice}
+                                    <SelectBox items={this.state.colors}
+                                        valueExpr="AttributeValueId"
+                                        displayExpr="Value"
+                                        placeholder={'Choose color'}
+                                        showClearButton={true} onValueChanged={this.onColorChange} />
+                                </Col>
+                            </Row>
 
-                            </Col>
+                            <Row>
+                                <Col sm={2}>
+
+                                    Quantity:
+
+                                        </Col>
+
+                                <Col sm={10}>
+
+                                    <TextBox placeholder={'Enter quantity here...'}
+                                        onValueChanged={this.onQuantityChanged}
+                                        value={this.state.quantity}>
+                                        <Validator>
+                                            <RequiredRule message={'*'} />
+                                        </Validator>
+                                    </TextBox>
+                                </Col>
+                            </Row>
                         </Row>
-                    </Row>
+                        <Row>
 
-                    <Row>
+                            <TabPanel
+                                height={"auto"}
+                                width={"100%"}
+                                dataSource={this.state.imageData}
+                                selectedIndex={this.state.selectedIndex}
+                                loop={false}
+                                itemComponent={TabImageItem}
+                                animationEnabled={true}
+                                swipeEnabled={true}
+                                itemTitleRender={this.itemTitleRender}
+                                onOptionChanged={this.onSelectionChanged}
 
-                        <TabPanel
-                            height={"auto"}
-                            width={"100%"}
-                            dataSource={this.state.imageData}
-                            selectedIndex={this.state.selectedIndex}
-                            loop={false}
-                            itemComponent={TabImageItem}
-                            animationEnabled={true}
-                            swipeEnabled={true}
-                            itemTitleRender={this.itemTitleRender}
-                            onOptionChanged={this.onSelectionChanged}
+                            />
 
-                        />
+                        </Row>
+                        <Row style={{ marginTop: "10px", textAlign: "center" }}>
 
-                    </Row>
-                    <Row style={{ marginTop: "10px", textAlign: "center" }}>
+                            <DevButton
 
-                        <DevButton
+                                icon={'check'}
+                                width={250}
+                                text={"Add to Cart"}
+                                type={"success"}
+                                stylingMode={"contained"}
+                                //onClick={this.addToCartClick}
+                                useSubmitBehavior={true}
+                            />
 
-                        icon={'check'}
-                        width={250}
-                        text={"Add to Cart"}
-                        type={"success"}
-                        stylingMode={"contained"}
-                        onClick={this.addToCartClick}
-                    />
-
-                    </Row>
+                        </Row>
+                    </form>
 
                 </Modal.Body>
-            <Modal.Footer>
-                <Button onClick={this.props.onHide}>Close</Button>
-            </Modal.Footer>
-            </Modal >
+                <Modal.Footer>
+                    <Button onClick={this.props.onHide}>Close</Button>
+                </Modal.Footer>
+            </Modal>
         );
     }
 }

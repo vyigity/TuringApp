@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace TuringApp.Models
 {
     public partial class ShoppingCart
     {
+        [Key]
         public int ItemId { get; set; }
         public string CartId { get; set; }
         public int ProductId { get; set; }

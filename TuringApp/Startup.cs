@@ -111,6 +111,9 @@ namespace TuringApp
             //builder.EntitySet<ProductCategory>("ProductCategories");
             builder.EntitySet<Department>("Departments");
             builder.EntitySet<Category>("Categories");
+            builder.EntitySet<ShoppingCart>("ShoppingCart");
+            builder.EntitySet<AttributeValue>("AttributeValue");
+
 
             var filteredProduct = builder.Action("GetProductByFilter");
             filteredProduct.Namespace = "TuringService";
