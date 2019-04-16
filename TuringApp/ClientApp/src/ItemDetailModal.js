@@ -205,7 +205,13 @@ export class ItemDetailModal extends React.Component {
                                         valueExpr="AttributeValueId"
                                         displayExpr="Value"
                                         placeholder={'Choose size'}
-                                        showClearButton={true} onValueChanged={this.onSizeChange} />
+                                        showClearButton={true} onValueChanged={this.onSizeChange} >
+
+                                        <Validator>
+                                            <RequiredRule message={'*'} />
+                                        </Validator>
+
+                                    </SelectBox>
                                 </Col>
                             </Row>
 
@@ -222,7 +228,13 @@ export class ItemDetailModal extends React.Component {
                                         valueExpr="AttributeValueId"
                                         displayExpr="Value"
                                         placeholder={'Choose color'}
-                                        showClearButton={true} onValueChanged={this.onColorChange} />
+                                        showClearButton={true} onValueChanged={this.onColorChange}>
+
+                                        <Validator>
+                                            <RequiredRule message={'*'} />
+                                        </Validator>
+
+                                    </SelectBox>
                                 </Col>
                             </Row>
 
