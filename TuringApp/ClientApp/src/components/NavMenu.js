@@ -23,6 +23,13 @@ export class NavMenu extends Component {
                                 <Glyphicon glyph='home' /> Products
               </NavItem>
                         </LinkContainer>
+
+                        <LinkContainer to={'/Payment'} exact>
+                            <NavItem>
+                                <Glyphicon glyph='home' /> Payment
+                            </NavItem>
+                        </LinkContainer>
+
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>

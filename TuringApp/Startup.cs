@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.OData.Edm;
+using Stripe;
 using System.IO;
 using TuringApp.Filters;
 using TuringApp.Models;
@@ -21,6 +22,8 @@ namespace TuringApp
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
+            StripeConfiguration.SetApiKey("sk_test_4eC39HqLyjWDarjtT1zdp7dc");
         }
 
         public IConfiguration Configuration { get; }
@@ -81,6 +84,10 @@ namespace TuringApp
                     name: "image",
                     template: "Images/product_images/");
 
+                routes.MapRoute(
+                    name: "api",
+                    template: "api/{Controller}/{Action}");
+
                 routes.MapODataServiceRoute("odata", "odata", GetEdmModel());
 
                 routes.Select().Expand().Filter().OrderBy().MaxTop(500).Count();
@@ -107,7 +114,7 @@ namespace TuringApp
 
            
 
-            builder.EntitySet<Product>("Products");
+            builder.EntitySet<Models.Product>("Products");
             //builder.EntitySet<ProductCategory>("ProductCategories");
             builder.EntitySet<Department>("Departments");
             builder.EntitySet<Category>("Categories");
