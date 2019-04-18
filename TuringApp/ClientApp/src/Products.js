@@ -4,6 +4,8 @@ import 'devextreme/data/odata/store';
 import DataGrid, { Column, FilterRow, HeaderFilter, SearchPanel } from 'devextreme-react/data-grid';
 import { CheckBox, SelectBox, NumberBox, Form, Item } from 'devextreme-react';
 
+import helpers from './Util';
+
 import { ItemDetailModal } from './ItemDetailModal';
 
 export class Products extends React.Component {
@@ -40,16 +42,28 @@ export class Products extends React.Component {
 
     fetchDepartments = () => {
 
-        fetch('/odata/Departments')
-            .then(response => response.json())
-            .then(data => this.setState({ departments: data.value }));
+        helpers.get({
+
+            url: '/odata/Departments',
+
+            onSuccess: (data) => {
+
+                this.setState({ departments: data.value })
+            }
+        });
     }
 
     fetchCategories = (departmentId) => {
 
-        fetch("/odata/Categories?$filter=departmentId eq " + departmentId)
-            .then(response => response.json())
-            .then(data => this.setState({ categories: data.value }));
+        helpers.get({
+
+            url: "/odata/Categories?$filter=departmentId eq " + departmentId,
+
+            onSuccess: (data) => {
+
+                this.setState({ categories: data.value })
+            }
+        });
     }
 
     onDepartmentsChange = (args) => {
@@ -128,7 +142,7 @@ export class Products extends React.Component {
 
     render() {
 
-        let detailModal = <ItemDetailModal show={this.state.itemDetailShow} onHide={this.modalClose} masterData={this.state.selectedRowData} />;
+        let detailModal = <ItemDetailModal show={this.state.itemDetailShow} onHide={this.modalClose} masterdata={this.state.selectedRowData} />;
 
         if (this.state.selectedRowData == null)
             detailModal = null;

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { CardElement, injectStripe } from 'react-stripe-elements';
 import notify from 'devextreme/ui/notify';
+import helpers from './Util';
 
 class CheckOutForm extends Component {
     constructor(props) {
@@ -13,17 +14,19 @@ class CheckOutForm extends Component {
         let { token } = await this.props.stripe.createToken({ name: "Name" });
         let data = { tokenId: token.id };
 
-        let response = await fetch("api/StripePayment/DoPayment", {
-           
-            headers: { 'Content-Type': 'application/json' },
-            method: "POST",
-            body: JSON.stringify(data)
+        helpers.post({
+
+            url: 'api/StripePayment/DoPayment',
+
+            data: data,
+
+            notifyError: true,
+
+            onSuccess: (response) => {
+
+                notify("Purchasing succeed.");
+            }
         });
-
-        if (response.ok) {
-
-            notify("Purchasing succeed.");
-        }
     }
 
     render() {

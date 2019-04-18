@@ -1,7 +1,9 @@
 using Microsoft.AspNet.OData.Builder;
 using Microsoft.AspNet.OData.Extensions;
+using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
@@ -35,10 +37,12 @@ namespace TuringApp
 
                 options =>
                 {
-                    options.Filters.Add(new ActionFilter()); // an instance
-                }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1).AddJsonOptions(options => { options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore; });
-            services.AddDbContext<turingContext>(opt => opt.UseMySQL("server=localhost;port=3306;user=root;password=1234;database=turing"));
+                    options.Filters.Add(new ActionFilter());
+                    options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
 
+                }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1).AddJsonOptions(options => { options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore; });
+
+            services.AddDbContext<turingContext>(opt => opt.UseMySQL("server=localhost;port=3306;user=root;password=1234;database=turing"));
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -47,10 +51,17 @@ namespace TuringApp
             });
 
             services.AddOData();
+
+            services.AddAntiforgery(o => {
+
+                o.HeaderName = "X-CSRF-TOKEN";
+            });
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IAntiforgery antiforgery)
         {
             if (env.IsDevelopment())
             {
@@ -61,6 +72,14 @@ namespace TuringApp
                 app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
+
+            app.Use(next => context =>
+            {
+                var tokens = antiforgery.GetAndStoreTokens(context);
+                context.Response.Cookies.Append("CSRF-TOKEN", tokens.RequestToken, new CookieOptions() { HttpOnly = false });
+
+                return next(context);
+            });
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
@@ -105,6 +124,7 @@ namespace TuringApp
                 }
             });
 
+      
 
         }
 

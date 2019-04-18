@@ -11,6 +11,7 @@
     "bootstrap": "^3.4.1",
     "devextreme": "^18.2.7",
     "devextreme-react": "^18.2.7",
+    "js-cookie": "^2.2.0",
     "react": "^16.8.6",
     "react-bootstrap": "^0.31.5",
     "react-data-grid": "^6.1.0",
@@ -22,7 +23,8 @@
     "require": "^2.4.20",
     "requirejs": "^2.3.6",
     "rimraf": "^2.6.2",
-    "typescript": "^3.4.2"
+    "typescript": "^3.4.2",
+    "universal-cookie": "^3.1.0"
   },
   "scripts": {
     "start": "rimraf ./build && react-scripts start",

@@ -4,11 +4,13 @@ import { Modal, Button, Row, Form, Grid,Col } from 'react-bootstrap';
 
 import TabPanel from 'devextreme-react/tab-panel';
 
-import { Button as DevButton, TextBox, SelectBox } from 'devextreme-react';
+import { Button as DevButton, TextBox, SelectBox, NumberBox } from 'devextreme-react';
 
 import TabImageItem from './TabImageItem';
 
 import notify from 'devextreme/ui/notify';
+
+import helpers from './Util';
 
 import {
     Validator,
@@ -40,8 +42,8 @@ export class ItemDetailModal extends React.Component {
 
         let imageData = [];
 
-        imageData.push({ Name: "1. Image", src: this.props.masterData.Image });
-        imageData.push({ Name: "2. Image", src: this.props.masterData.Image2 });
+        imageData.push({ Name: "1. Image", src: this.props.masterdata.Image });
+        imageData.push({ Name: "2. Image", src: this.props.masterdata.Image2 });
 
         this.setState({ imageData: imageData });
     }
@@ -50,13 +52,25 @@ export class ItemDetailModal extends React.Component {
 
         this.getImagesFromProp();
 
-        fetch('/odata/AttributeValue?$filter=AttributeId eq 1')
-            .then(response => response.json())
-            .then(data => this.setState({ sizes: data.value }));
+        helpers.get({
 
-        fetch('/odata/AttributeValue?$filter=AttributeId eq 2')
-            .then(response => response.json())
-            .then(data => this.setState({ colors: data.value }));
+            url: '/odata/AttributeValue?$filter=AttributeId eq 1',
+
+            onSuccess: (data) => {
+
+                this.setState({ sizes: data.value })
+            }
+        });
+
+        helpers.get({
+
+            url: '/odata/AttributeValue?$filter=AttributeId eq 2',
+
+            onSuccess: (data) => {
+
+                this.setState({ colors: data.value })
+            }
+        });
     }
 
     onSelectionChanged = (args) => {
@@ -84,28 +98,27 @@ export class ItemDetailModal extends React.Component {
         e.preventDefault();
 
         let data = {
-            ItemId: 1,
-            ProductId: this.props.masterData.ProductId,
+            ProductId: this.props.masterdata.ProductId,
             Quantity: this.state.quantity,
             Attributes: JSON.stringify({ Size: this.state.selectedSize, Color: this.state.selectedColor })
         };
 
-        fetch("/odata/ShoppingCart", {
+        helpers.post({
 
-            headers: { 'Content-Type': 'application/json' },
-            method: "POST",
-            body: JSON.stringify(data)
-        })
-            .then(function (response) {
-                return response.json();
-            })
-            .then(function (data) {
+            url: '/odata/ShoppingCart',
 
-                notify("Item added to cart.");
+            data: data,
 
-            }).catch(function () {
-                console.log("An error occurred.");
-            });
+            notifySuccess: true,
+            successMessage: "Item added to cart.",
+
+            notifyError: true,
+
+            onSuccess: (response) => {
+
+                notify("Purchasing succeed.");
+            }
+        });
     }
 
     onSizeChange = (args) => {
@@ -125,7 +138,7 @@ export class ItemDetailModal extends React.Component {
                 {...this.props}
                 size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
-                centered>
+                >
 
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
@@ -145,7 +158,7 @@ export class ItemDetailModal extends React.Component {
 
                                 <Col sm={10}>
 
-                                    {this.props.masterData.Name}
+                                    {this.props.masterdata.Name}
 
                                 </Col>
                             </Row>
@@ -159,7 +172,7 @@ export class ItemDetailModal extends React.Component {
 
                                 <Col sm={10}>
 
-                                    {this.props.masterData.Description}
+                                    {this.props.masterdata.Description}
 
                                 </Col>
                             </Row>
@@ -173,7 +186,7 @@ export class ItemDetailModal extends React.Component {
 
                                 <Col sm={10}>
 
-                                    {this.props.masterData.Price}
+                                    {this.props.masterdata.Price}
 
                                 </Col>
                             </Row>
@@ -187,7 +200,7 @@ export class ItemDetailModal extends React.Component {
 
                             <Col sm={10}>
 
-                                    {this.props.masterData.DiscountedPrice}
+                                    {this.props.masterdata.DiscountedPrice}
 
                                 </Col>
                             </Row>
@@ -247,13 +260,16 @@ export class ItemDetailModal extends React.Component {
 
                                 <Col sm={10}>
 
-                                    <TextBox placeholder={'Enter quantity here...'}
+                                    <NumberBox placeholder={'Enter quantity here...'}
                                         onValueChanged={this.onQuantityChanged}
-                                        value={this.state.quantity}>
+                                        value={this.state.quantity}
+                                        showSpinButtons={true}
+                                        min={1}>
+
                                         <Validator>
                                             <RequiredRule message={'*'} />
                                         </Validator>
-                                    </TextBox>
+                                    </NumberBox>
                                 </Col>
                             </Row>
                         </Row>

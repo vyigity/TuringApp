@@ -528,6 +528,7 @@ namespace TuringApp.Models
                     .HasName("idx_shopping_cart_cart_id");
 
                 entity.Property(e => e.ItemId)
+                .ValueGeneratedOnAdd()
                     .HasColumnName("item_id")
                     .HasColumnType("int(11)");
 
