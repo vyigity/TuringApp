@@ -14,16 +14,25 @@ namespace TuringApp.Controllers
     {
         public class UserView
         {
-            public string userName { get; set; }
+            public string email { get; set; }
             public string password { get; set; }
+        }
+
+        private turingContext _db;
+        public AccountController(turingContext context)
+        {
+            _db = context;
         }
         public async Task<IActionResult> Login([FromBody] UserView user)
         {
-            if (LoginUser(user.userName, user.password))
+            var customer = LoginUser(user.email, user.password);
+
+            if (customer != null)
             {
                 var claims = new List<Claim>
             {
-                new Claim("Name",user.userName)
+                new Claim("Name",customer.Name),
+                new Claim("CustomerId",customer.CustomerId.ToString())
             };
 
                 var userIdentity = new ClaimsIdentity(claims, "login");
@@ -32,7 +41,7 @@ namespace TuringApp.Controllers
                 await HttpContext.SignInAsync(principal);
 
                 //Just redirect to our index after logging in. 
-                return Ok(new { name = "Veli Yigit YOLCU" });
+                return Ok(new { name = customer.Name });
             }
             else
             {
@@ -44,20 +53,14 @@ namespace TuringApp.Controllers
         {
             await HttpContext.SignOutAsync();
 
-            return RedirectToAction("Index");
+            return Ok(new { message = "LoggedOut" });
         }
 
-        private bool LoginUser(string username, string password)
+        private Customer LoginUser(string email, string password)
         {
-            if (username == "cagatay" && password == "123")
-            {
-                return true;
-            }
-            else
-            {
-                return true;
-            }
+            var user = _db.Customer.SingleOrDefault(r => r.Email == email && r.Password == password);
 
+            return user;
         }
     }
 }

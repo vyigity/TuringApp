@@ -26,13 +26,13 @@ export class LoginModal extends React.Component {
 
         }
 
-        this.userName = null;
+        this.email = null;
         this.password = null;
     }
 
-    onUserNameChanged = (args) => {
+    onEmailChanged = (args) => {
 
-        this.userName = args.value;
+        this.email = args.value;
     }
 
     onPasswordChanged = (args) => {
@@ -44,7 +44,7 @@ export class LoginModal extends React.Component {
 
         let data = {
 
-            userName: this.userName,
+            email: this.email,
             password: this.password
         };
 
@@ -56,7 +56,11 @@ export class LoginModal extends React.Component {
 
             notifySuccess: true,
             successMessage: "Login success.",
-            notifyError: true
+            notifyError: true,
+            onSuccess: (data) => {
+
+                this.props.onLogin(data);
+            }
         });
     }
 
@@ -82,8 +86,8 @@ export class LoginModal extends React.Component {
                         colCount={1}
                         id={'form'}
                     >
-                        <Item label={{ text: "User Name" }} editorType={'dxTextBox'} editorOptions={{ onValueChanged: this.onPasswordChanged }} />
-                        <Item label={{ text: "Password" }} editorType={'dxTextBox'} editorOptions={{ onValueChanged: this.onUserNameChanged }}/>
+                        <Item label={{ text: "Email" }} editorType={'dxTextBox'} editorOptions={{ onValueChanged: this.onEmailChanged }} />
+                        <Item label={{ text: "Password" }} editorType={'dxTextBox'} editorOptions={{ onValueChanged: this.onPasswordChanged }} />
                                 
                     </Form>
 

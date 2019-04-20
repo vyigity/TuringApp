@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import DataGrid, { Column, FilterRow, HeaderFilter, SearchPanel } from 'devextreme-react/data-grid';
+import DataGrid, { Column, FilterRow, HeaderFilter, SearchPanel, Summary, TotalItem } from 'devextreme-react/data-grid';
 
 import { ItemDetailModal } from './ItemDetailModal';
 
@@ -97,6 +97,8 @@ export default class ShoppingCart extends Component {
                         dataField={'Attributes'}
                         caption={'Attributes'}
                         dataType={'string'}
+                        visible={false}
+                        calculateCellValue={this.calculateCellValue}
                     />
                     <Column
                         dataField={'Quantity'}
@@ -114,6 +116,17 @@ export default class ShoppingCart extends Component {
                         caption={'DiscountedPrice'}
                         dataType={'number'}
                     />
+
+                    <Summary>
+
+                        <TotalItem
+                            column={'Product.Price'}
+                            summaryType={'sum'}/>
+                        <TotalItem
+                            column={'Product.DiscountedPrice'}
+                            summaryType={'sum'} />
+
+                    </Summary>
 
                 </DataGrid>
 
