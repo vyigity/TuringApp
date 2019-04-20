@@ -15,6 +15,8 @@ namespace TuringApp.Models
         public string Thumbnail { get; set; }
         public short Display { get; set; }
 
+        public IEnumerable<ShoppingCart> ShoppingCarts { get; set; }
+
         public IEnumerable<ProductCategory> ProductCategories { get; set; }
     }
 }

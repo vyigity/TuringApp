@@ -58,6 +58,23 @@ const helpers = {
     }
 }
 
+const shoppingHelpers =
+{
+    getShoppingCartId: () => {
+
+        let id = Cookies.get("Turing.ShoppingCartId");
+
+        if (id == null || id === undefined) {
+
+            return "0";
+
+        } else {
+
+            return id;
+        }
+    }
+}
+
 function callSuccessFunc(confObject, data) {
 
     if (confObject.onSuccess !== undefined) {
@@ -104,4 +121,4 @@ function hasNotifyError(confObject) {
     }
 }
 
-export default helpers;
+export {helpers, shoppingHelpers }

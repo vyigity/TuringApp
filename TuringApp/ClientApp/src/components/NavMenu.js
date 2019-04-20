@@ -30,6 +30,13 @@ export class NavMenu extends Component {
                             </NavItem>
                         </LinkContainer>
 
+                        <LinkContainer to={'/ShoppingCart'} exact>
+                            <NavItem>
+                                <Glyphicon glyph='home' /> Shopping Cart
+                            </NavItem>
+                        </LinkContainer>
+
+
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>

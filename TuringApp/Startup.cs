@@ -148,6 +148,10 @@ namespace TuringApp
             filteredProduct.Parameter<int?>("selectedCategoryId");
             filteredProduct.Returns<IActionResult>();
 
+            var shoppingCartWithProduct = builder.Action("GetShoppingCartWithProductByFilter");
+            filteredProduct.Namespace = "TuringService";
+            filteredProduct.Returns<IActionResult>();
+
             return builder.GetEdmModel();
         }
     }

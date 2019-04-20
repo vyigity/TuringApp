@@ -39,12 +39,12 @@ namespace TuringApp.Controllers
 
         public IActionResult Post([FromBody]ShoppingCart shoppingCart)
         {
-            string shoppingCarId = HttpContextAccessor.HttpContext.Request.Cookies["Truning.ShoppingCardId"];
+            string shoppingCarId = HttpContextAccessor.HttpContext.Request.Cookies["Turing.ShoppingCartId"];
 
             if (shoppingCarId == null)
             {
                 shoppingCarId = Guid.NewGuid().ToString("N");
-                HttpContextAccessor.HttpContext.Response.Cookies.Append("Truning.ShoppingCardId", shoppingCarId, new CookieOptions() { HttpOnly = false });
+                HttpContextAccessor.HttpContext.Response.Cookies.Append("Turing.ShoppingCartId", shoppingCarId, new CookieOptions() { HttpOnly = false });
             }
 
             shoppingCart.AddedOn = DateTime.Now;
@@ -54,6 +54,15 @@ namespace TuringApp.Controllers
             _db.SaveChanges();
 
             return Ok(shoppingCart);
+        }
+
+        [EnableQuery]
+        [ODataRoute("GetShoppingCartWithProductByFilter")]
+        public IActionResult GetProductByFilter()
+        {
+            IQueryable<ShoppingCart> data = _db.ShoppingCart.Include(r => r.Product);
+
+            return Ok(data);
         }
     }
 }

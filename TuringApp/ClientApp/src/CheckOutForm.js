@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { CardElement, injectStripe } from 'react-stripe-elements';
 import notify from 'devextreme/ui/notify';
-import helpers from './Util';
+import { helpers } from './Util';
 
 class CheckOutForm extends Component {
     constructor(props) {

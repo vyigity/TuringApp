@@ -14,5 +14,6 @@ namespace TuringApp.Models
         public int Quantity { get; set; }
         public byte BuyNow { get; set; }
         public DateTime AddedOn { get; set; }
+        public Product Product { get; set; }
     }
 }

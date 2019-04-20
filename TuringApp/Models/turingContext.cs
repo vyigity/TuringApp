@@ -406,6 +406,7 @@ namespace TuringApp.Models
                     .HasMaxLength(150)
                     .IsUnicode(false);
 
+                entity.HasMany(r => r.ShoppingCarts).WithOne(r => r.Product).HasForeignKey(r => r.ProductId);
               
             });
 

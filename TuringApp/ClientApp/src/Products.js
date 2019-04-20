@@ -4,7 +4,7 @@ import 'devextreme/data/odata/store';
 import DataGrid, { Column, FilterRow, HeaderFilter, SearchPanel } from 'devextreme-react/data-grid';
 import { CheckBox, SelectBox, NumberBox, Form, Item } from 'devextreme-react';
 
-import helpers from './Util';
+import { helpers } from './Util';
 
 import { ItemDetailModal } from './ItemDetailModal';
 

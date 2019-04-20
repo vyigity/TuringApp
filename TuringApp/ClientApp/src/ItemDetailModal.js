@@ -10,7 +10,7 @@ import TabImageItem from './TabImageItem';
 
 import notify from 'devextreme/ui/notify';
 
-import helpers from './Util';
+import { helpers } from './Util';
 
 import {
     Validator,
@@ -48,9 +48,19 @@ export class ItemDetailModal extends React.Component {
         this.setState({ imageData: imageData });
     }
 
+    getAttributesFromProp = () => {
+
+        if (this.props.attributes != null) {
+
+            let attributeData = JSON.parse(this.props.attributes);
+            this.setState({ selectedSize: attributeData.Size, selectedColor: attributeData.Color });
+        }
+    }
+
     componentDidMount() {
 
         this.getImagesFromProp();
+        this.getAttributesFromProp();
 
         helpers.get({
 
@@ -111,13 +121,8 @@ export class ItemDetailModal extends React.Component {
 
             notifySuccess: true,
             successMessage: "Item added to cart.",
+            notifyError: true
 
-            notifyError: true,
-
-            onSuccess: (response) => {
-
-                notify("Purchasing succeed.");
-            }
         });
     }
 
@@ -131,6 +136,11 @@ export class ItemDetailModal extends React.Component {
         this.setState({ selectedColor: args.value });
     };
 
+    onHide = () => {
+
+        this.setState({ selectedSize: null, selectedColor: null });
+    };
+
     render() {
         return (
 
@@ -138,9 +148,10 @@ export class ItemDetailModal extends React.Component {
                 {...this.props}
                 size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
+                backdrop ="static"
                 >
 
-                <Modal.Header closeButton>
+                <Modal.Header>
                     <Modal.Title id="contained-modal-title-vcenter">
                         Product Details
                 </Modal.Title>
@@ -218,7 +229,8 @@ export class ItemDetailModal extends React.Component {
                                         valueExpr="AttributeValueId"
                                         displayExpr="Value"
                                         placeholder={'Choose size'}
-                                        showClearButton={true} onValueChanged={this.onSizeChange} >
+                                        showClearButton={true} onValueChanged={this.onSizeChange}
+                                        value={this.state.selectedSize}>
 
                                         <Validator>
                                             <RequiredRule message={'*'} />
@@ -231,7 +243,7 @@ export class ItemDetailModal extends React.Component {
                             <Row>
                                 <Col sm={2}>
 
-                                    Size:
+                                    Color:
 
                                         </Col>
 
@@ -241,7 +253,8 @@ export class ItemDetailModal extends React.Component {
                                         valueExpr="AttributeValueId"
                                         displayExpr="Value"
                                         placeholder={'Choose color'}
-                                        showClearButton={true} onValueChanged={this.onColorChange}>
+                                        showClearButton={true} onValueChanged={this.onColorChange}
+                                        value={this.state.selectedColor}>
 
                                         <Validator>
                                             <RequiredRule message={'*'} />
@@ -301,6 +314,7 @@ export class ItemDetailModal extends React.Component {
                                 stylingMode={"contained"}
                                 //onClick={this.addToCartClick}
                                 useSubmitBehavior={true}
+                                visible={this.props.readOnly === undefined || !this.props.readOnly}
                             />
 
                         </Row>
@@ -308,7 +322,7 @@ export class ItemDetailModal extends React.Component {
 
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={this.props.onHide}>Close</Button>
+                    <Button onClick={() => { this.onHide(); this.props.onHide() }}>Close</Button>
                 </Modal.Footer>
             </Modal>
         );
