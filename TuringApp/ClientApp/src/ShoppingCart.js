@@ -15,12 +15,12 @@ export default class ShoppingCart extends Component {
 
             itemDetailShow: false,
             selectedRowData: null,
-            attributes:null,
+            attributes: null,
 
             dataSourceOptions: {
                 store: {
                     type: 'odata',
-                    url: "/odata/ShoppingCart?$filter=CartId eq '" + shoppingHelpers.getShoppingCartId() + "'",
+                    url: "/odata/ShoppingCart?$expand=Product&$filter=CartId eq '" + shoppingHelpers.getShoppingCartId() + "'",
                     version: 4
                 },
             }
@@ -87,11 +87,12 @@ export default class ShoppingCart extends Component {
                         placeholder={'Search...'} />
 
                     <Column dataField={'ProductId'} />
+
                     <Column
-                        dataField={'ProductId'}
+                        dataField={'Product.Name'}
                         dataType={'string'}
-                        width={250}
                     />
+
                     <Column
                         dataField={'Attributes'}
                         caption={'Attributes'}
@@ -103,9 +104,15 @@ export default class ShoppingCart extends Component {
                         dataType={'number'}
                     />
                     <Column
-                        dataField={'AddedOn'}
-                        caption={'AddedOn'}
-                        dataType={'date'}
+                        dataField={'Product.Price'}
+                        caption={'Price'}
+                        dataType={'number'}
+                    />
+
+                    <Column
+                        dataField={'Product.DiscountedPrice'}
+                        caption={'DiscountedPrice'}
+                        dataType={'number'}
                     />
 
                 </DataGrid>

@@ -11,15 +11,15 @@ import '../node_modules/devextreme/dist/css/dx.material.blue.light.css';
 //<Route path='/deneme' component={deneme2} />
 
 export default class App extends Component {
-  displayName = App.name
+    displayName = App.name
 
-  render() {
-    return (
-      <Layout>
-            <Route exact path='/' component={Products} />    
-            <Route exact path='/Payment' component={StripePayment} />  
-            <Route exact path='/ShoppingCart' component={ShoppingCart} />    
-      </Layout>
-    );
-  }
+    render() {
+        return (
+            <Layout>
+                <Route exact path='/' component={Products} />
+                <Route exact path='/ShoppingCart' component={ShoppingCart} />
+                <Route exact path='/Payment' component={StripePayment} />
+            </Layout>
+        );
+    }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.OData.Builder;
+using System;
 using System.Collections.Generic;
 
 namespace TuringApp.Models
@@ -15,6 +16,7 @@ namespace TuringApp.Models
         public string Thumbnail { get; set; }
         public short Display { get; set; }
 
+        [Contained]
         public IEnumerable<ShoppingCart> ShoppingCarts { get; set; }
 
         public IEnumerable<ProductCategory> ProductCategories { get; set; }

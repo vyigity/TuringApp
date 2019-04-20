@@ -55,14 +55,5 @@ namespace TuringApp.Controllers
 
             return Ok(shoppingCart);
         }
-
-        [EnableQuery]
-        [ODataRoute("GetShoppingCartWithProductByFilter")]
-        public IActionResult GetProductByFilter()
-        {
-            IQueryable<ShoppingCart> data = _db.ShoppingCart.Include(r => r.Product);
-
-            return Ok(data);
-        }
     }
 }

@@ -1,6 +1,7 @@
 using Microsoft.AspNet.OData.Builder;
 using Microsoft.AspNet.OData.Extensions;
 using Microsoft.AspNetCore.Antiforgery;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -40,7 +41,10 @@ namespace TuringApp
                     options.Filters.Add(new ActionFilter());
                     options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
 
-                }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1).AddJsonOptions(options => { options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore; });
+                }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1).AddJsonOptions(options =>
+                {
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                });
 
             services.AddDbContext<turingContext>(opt => opt.UseMySQL("server=localhost;port=3306;user=root;password=1234;database=turing"));
 
@@ -52,12 +56,16 @@ namespace TuringApp
 
             services.AddOData();
 
-            services.AddAntiforgery(o => {
+            services.AddAntiforgery(o =>
+            {
 
                 o.HeaderName = "X-CSRF-TOKEN";
             });
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -72,6 +80,8 @@ namespace TuringApp
                 app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
+
+            app.UseAuthentication();
 
             app.Use(next => context =>
             {
@@ -90,7 +100,7 @@ namespace TuringApp
             Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Images", "product_images")),
                 RequestPath = "/MyImages"
             });
-                
+
             app.UseSpaStaticFiles();
 
             app.UseMvc(routes =>
@@ -124,15 +134,13 @@ namespace TuringApp
                 }
             });
 
-      
-
         }
 
         private static IEdmModel GetEdmModel()
         {
             ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
 
-           
+
 
             builder.EntitySet<Models.Product>("Products");
             //builder.EntitySet<ProductCategory>("ProductCategories");
@@ -141,15 +149,10 @@ namespace TuringApp
             builder.EntitySet<ShoppingCart>("ShoppingCart");
             builder.EntitySet<AttributeValue>("AttributeValue");
 
-
             var filteredProduct = builder.Action("GetProductByFilter");
             filteredProduct.Namespace = "TuringService";
             filteredProduct.Parameter<int?>("selectedDepartment");
             filteredProduct.Parameter<int?>("selectedCategoryId");
-            filteredProduct.Returns<IActionResult>();
-
-            var shoppingCartWithProduct = builder.Action("GetShoppingCartWithProductByFilter");
-            filteredProduct.Namespace = "TuringService";
             filteredProduct.Returns<IActionResult>();
 
             return builder.GetEdmModel();
