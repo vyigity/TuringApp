@@ -24,6 +24,22 @@ export class NavMenu extends Component {
 
     }
 
+    componentDidMount() {
+
+        helpers.post({
+
+            url: './api/Account/isLogin',
+
+            notifySuccess: false,
+            notifyError: false,
+
+            onSuccess: (args) => {
+
+                this.onLogin(args);
+            }
+        });
+    }
+
     modalShow = () => {
 
         this.setState({ showLogin: true });

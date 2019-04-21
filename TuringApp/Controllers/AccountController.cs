@@ -23,8 +23,20 @@ namespace TuringApp.Controllers
         {
             _db = context;
         }
+        public IActionResult isLogin()
+        {
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                return Ok(new { name = HttpContext.User.Claims.Single(r => r.Type == "Name").Value });
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
         public async Task<IActionResult> Login([FromBody] UserView user)
         {
+
             var customer = LoginUser(user.email, user.password);
 
             if (customer != null)
