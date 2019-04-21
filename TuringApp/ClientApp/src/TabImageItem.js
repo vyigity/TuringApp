@@ -8,7 +8,7 @@ export default class ItemDetailModal extends React.PureComponent {
 
         return (
 
-            <img src={"MyImages/" + item.src} />
+            <img src={"./MyImages/" + item.src} />
         );
     }
 }

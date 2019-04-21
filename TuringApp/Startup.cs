@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.OData.Edm;
 using Stripe;
+using System;
 using System.IO;
 using TuringApp.Filters;
 using TuringApp.Models;
@@ -39,7 +40,7 @@ namespace TuringApp
                 options =>
                 {
                     options.Filters.Add(new ActionFilter());
-                    options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+                    //options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
 
                 }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1).AddJsonOptions(options =>
                 {
@@ -78,20 +79,27 @@ namespace TuringApp
             else
             {
                 app.UseExceptionHandler("/Error");
-                app.UseHsts();
+                //app.UseHsts();
             }
 
             app.UseAuthentication();
 
-            app.Use(next => context =>
-            {
-                var tokens = antiforgery.GetAndStoreTokens(context);
-                context.Response.Cookies.Append("CSRF-TOKEN", tokens.RequestToken, new CookieOptions() { HttpOnly = false });
+            //app.Use(next => context =>
+            //{
+            //    string path = context.Request.Path.Value;
 
-                return next(context);
-            });
+            //    if (
+            //        string.Equals(path, "/", StringComparison.OrdinalIgnoreCase) ||
+            //        string.Equals(path, "/index.html", StringComparison.OrdinalIgnoreCase))
+            //    {
+            //        var tokens = antiforgery.GetAndStoreTokens(context);
+            //        context.Response.Cookies.Append("CSRF-TOKEN", tokens.RequestToken, new CookieOptions() { HttpOnly = false });
+            //    }
 
-            app.UseHttpsRedirection();
+            //    return next(context);
+            //});
+
+            //app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseStaticFiles(new StaticFileOptions
@@ -102,6 +110,7 @@ namespace TuringApp
             });
 
             app.UseSpaStaticFiles();
+
 
             app.UseMvc(routes =>
             {
@@ -121,7 +130,6 @@ namespace TuringApp
 
                 routes.Select().Expand().Filter().OrderBy().MaxTop(500).Count();
             });
-
 
 
             app.UseSpa(spa =>

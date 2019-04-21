@@ -64,7 +64,7 @@ export class ItemDetailModal extends React.Component {
 
         helpers.get({
 
-            url: '/odata/AttributeValue?$filter=AttributeId eq 1',
+            url: './odata/AttributeValue?$filter=AttributeId eq 1',
 
             onSuccess: (data) => {
 
@@ -74,7 +74,7 @@ export class ItemDetailModal extends React.Component {
 
         helpers.get({
 
-            url: '/odata/AttributeValue?$filter=AttributeId eq 2',
+            url: './odata/AttributeValue?$filter=AttributeId eq 2',
 
             onSuccess: (data) => {
 
@@ -115,7 +115,7 @@ export class ItemDetailModal extends React.Component {
 
         helpers.post({
 
-            url: '/odata/ShoppingCart',
+            url: './odata/ShoppingCart',
 
             data: data,
 

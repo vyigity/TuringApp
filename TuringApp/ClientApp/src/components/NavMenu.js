@@ -39,7 +39,7 @@ export class NavMenu extends Component {
 
         helpers.post({
 
-            url: '/api/Account/LogOut',
+            url: './api/Account/LogOut',
 
             notifySuccess: true,
             successMessage: "Logout success.",

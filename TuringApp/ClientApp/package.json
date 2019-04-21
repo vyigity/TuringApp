@@ -2,6 +2,7 @@
   "name": "TuringApp",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://192.168.1.27/TuringApp",
   "dependencies": {
     "@syncfusion/ej2-react-buttons": "^17.1.38",
     "@syncfusion/ej2-react-dropdowns": "^17.1.40",

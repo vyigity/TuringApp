@@ -20,7 +20,7 @@ export default class ShoppingCart extends Component {
             dataSourceOptions: {
                 store: {
                     type: 'odata',
-                    url: "/odata/ShoppingCart?$expand=Product&$filter=CartId eq '" + shoppingHelpers.getShoppingCartId() + "'",
+                    url: "./odata/ShoppingCart?$expand=Product&$filter=CartId eq '" + shoppingHelpers.getShoppingCartId() + "'",
                     version: 4
                 },
             }
@@ -37,7 +37,7 @@ export default class ShoppingCart extends Component {
 
             helpers.get({
 
-                url: "/odata/Products?$filter=ProductId eq " + selectedRowData.selectedRowsData[0].ProductId,
+                url: "./odata/Products?$filter=ProductId eq " + selectedRowData.selectedRowsData[0].ProductId,
 
                 onSuccess: (data) => {
 

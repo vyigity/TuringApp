@@ -50,7 +50,7 @@ export class LoginModal extends React.Component {
 
         helpers.post({
 
-            url: '/api/Account/Login',
+            url: './api/Account/Login',
 
             data: data,
 

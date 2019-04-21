@@ -16,7 +16,7 @@ class CheckOutForm extends Component {
 
         helpers.post({
 
-            url: 'api/StripePayment/DoPayment',
+            url: './api/StripePayment/DoPayment',
 
             data: data,
 

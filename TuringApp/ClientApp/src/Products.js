@@ -26,7 +26,7 @@ export class Products extends React.Component {
             dataSourceOptions: {
                 store: {
                     type: 'odata',
-                    url: '/odata/Products',
+                    url: './odata/Products',
                     version: 4
                 },
             }
@@ -44,7 +44,7 @@ export class Products extends React.Component {
 
         helpers.get({
 
-            url: '/odata/Departments',
+            url: './odata/Departments',
 
             onSuccess: (data) => {
 
@@ -57,7 +57,7 @@ export class Products extends React.Component {
 
         helpers.get({
 
-            url: "/odata/Categories?$filter=departmentId eq " + departmentId,
+            url: "./odata/Categories?$filter=departmentId eq " + departmentId,
 
             onSuccess: (data) => {
 
@@ -74,7 +74,7 @@ export class Products extends React.Component {
         let dataSourceOptions = {
             store: {
                 type: 'odata',
-                url: "/odata/GetProductByFilter",
+                url: "./odata/GetProductByFilter",
                 version: 4
             }
         };
@@ -99,7 +99,7 @@ export class Products extends React.Component {
         let dataSourceOptions = {
             store: {
                 type: 'odata',
-                url: "/odata/GetProductByFilter?selectedDepartment=" + this.state.selectedDepartment,
+                url: "./odata/GetProductByFilter?selectedDepartment=" + this.state.selectedDepartment,
                 version: 4
             }
         };
